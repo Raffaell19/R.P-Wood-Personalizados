@@ -263,6 +263,61 @@
       const cart = getCart();
       const total = getCartTotal();
 
+      // Check URL parameters for Stripe redirect status
+      const urlParams = new URLSearchParams(window.location.search);
+      const isSuccess = urlParams.get('success') === 'true';
+      const isCanceled = urlParams.get('canceled') === 'true';
+      const orderIdParam = urlParams.get('order_id');
+
+      if (isSuccess && orderIdParam) {
+        clearCart();
+        gatewayModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        loaderArea.style.display = 'block';
+        pixArea.style.display = 'none';
+        successArea.style.display = 'none';
+        gatewayTitle.textContent = "Carregando Confirmação...";
+        gatewayDesc.textContent = "Obtendo dados do pedido pago no banco de dados...";
+
+        supabase
+          .from('orders')
+          .select('*')
+          .eq('id', orderIdParam)
+          .single()
+          .then(({ data: order, error }) => {
+            if (error || !order) {
+              console.error("Error loading order:", error);
+              gatewayTitle.textContent = "Pedido não encontrado";
+              gatewayDesc.textContent = "O pedido foi pago mas não pôde ser carregado.";
+              return;
+            }
+
+            loaderArea.style.display = 'none';
+            successArea.style.display = 'block';
+            document.getElementById('gateway-success-desc').textContent = `Seu pagamento de ${formatPrice(order.total_amount)} foi aprovado com sucesso via Stripe!`;
+            
+            setupWhatsAppRedirect({
+              name: order.customer_name,
+              phone: order.customer_phone,
+              email: order.customer_email,
+              address: order.shipping_address.address,
+              num: order.shipping_address.number,
+              comp: order.shipping_address.complement,
+              neighborhood: order.shipping_address.neighborhood,
+              city: order.shipping_address.city,
+              state: order.shipping_address.state,
+              items: order.items,
+              total: order.total_amount,
+              paymentMethod: order.payment_method
+            }, "Pago (Stripe)");
+          });
+        return;
+      }
+
+      if (isCanceled) {
+        alert("O pagamento via Stripe foi cancelado. Você pode tentar concluir o pedido novamente.");
+      }
+
       if (cart.length === 0) {
         window.location.href = '/carrinho.html';
         return;
@@ -375,43 +430,36 @@
           console.error('Falha ao salvar no Supabase:', err);
         }
 
-        // Payment Simulation Flow
         if (selectedMethod === 'stripe') {
-          // Stripe simulation
           loaderArea.style.display = 'block';
           pixArea.style.display = 'none';
           successArea.style.display = 'none';
           
-          gatewayTitle.textContent = "Processando Pagamento...";
-          gatewayDesc.textContent = "Conectando ao gateway Stripe em Modo Teste...";
+          gatewayTitle.textContent = "Redirecionando...";
+          gatewayDesc.textContent = "Criando sessão de pagamento segura no Stripe...";
 
-          setTimeout(() => {
-            gatewayTitle.textContent = "Validando Cartão...";
-            gatewayDesc.textContent = "Verificando saldo e autenticação 3D Secure...";
+          try {
+            const response = await fetch('/api/create-checkout-session', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ orderId: dbOrder.id }),
+            });
 
-            setTimeout(async () => {
-              // Update payment status in database
-              if (dbOrder) {
-                try {
-                  await supabase
-                    .from('orders')
-                    .update({ payment_status: 'pago_stripe_teste' })
-                    .eq('id', dbOrder.id);
-                  console.log('Status do pagamento atualizado no Supabase.');
-                } catch (dbErr) {
-                  console.error('Erro ao atualizar status do pagamento no DB:', dbErr);
-                }
-              }
-
-              // Success card simulation
-              loaderArea.style.display = 'none';
-              successArea.style.display = 'block';
-              document.getElementById('gateway-success-desc').textContent = "Seu pagamento de " + formatPrice(total) + " foi aprovado com sucesso via Stripe Test Gateway!";
-              
-              // Set WhatsApp redirect action
-              setupWhatsAppRedirect(orderDetails, "Pago (Stripe)");
-            }, 2500);
-          }, 1500);
+            const session = await response.json();
+            if (session.url) {
+              window.location.href = session.url;
+            } else {
+              throw new Error(session.error || 'Erro desconhecido ao criar sessão');
+            }
+          } catch (stripeErr) {
+            console.error('Stripe Integration Error:', stripeErr);
+            loaderArea.style.display = 'none';
+            gatewayModal.classList.remove('active');
+            document.body.style.overflow = '';
+            alert('Erro ao conectar ao Stripe: ' + stripeErr.message);
+          }
 
         } else if (selectedMethod === 'pix') {
           // PIX Simulation
