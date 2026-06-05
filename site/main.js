@@ -2,7 +2,7 @@
    R.P WOOD PERSONALIZADOS — Main JavaScript
    ============================================ */
 
-import { initPage } from './js/shared.js';
+import { initPage, initCounters } from './js/shared.js';
 
 // ===== INTRO ANIMATION =====
 function initIntro() {
@@ -229,4 +229,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initSmoothScroll();
   initParallax();
   initActiveLink();
+  initCounters();
 });
