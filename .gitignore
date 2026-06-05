@@ -1,0 +1,24 @@
+# Node dependencies
+node_modules/
+dist/
+dist-ssr/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# Gemini / Antigravity IDE specific files
+.gemini/
+.gemini-ide/
+*.log

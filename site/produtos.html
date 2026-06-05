@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nossos Produtos | R.P Wood Personalizados</title>
+  <meta name="description" content="Explore e compre os produtos de madeira premium da R.P Wood. Quadros decorativos, porta-chaves personalizados, tábuas de churrasco gourmet e muito mais." />
+  <meta name="author" content="R.P Wood Personalizados" />
+  <meta property="og:title" content="Nossos Produtos | R.P Wood Personalizados" />
+  <meta property="og:description" content="Explore e compre os produtos de madeira premium da R.P Wood. Quadros decorativos, porta-chaves personalizados, tábuas de churrasco gourmet e muito mais." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- ==================== PAGE HERO ==================== -->
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <img src="/images/products-hero.png" alt="Showcase de produtos em madeira" loading="eager" />
+      <div class="page-hero-overlay"></div>
+    </div>
+    <div class="page-hero-content reveal">
+      <h1 class="page-hero-title">Nossos Produtos</h1>
+      <p class="page-hero-subtitle">Leve para sua casa a beleza e exclusividade do entalhe premium em madeira maciça.</p>
+    </div>
+  </section>
+
+  <!-- ==================== PRODUCT GRID ==================== -->
+  <section class="section">
+    <div class="container">
+      
+      <!-- Filters container -->
+      <div class="filter-container reveal" id="filters-container">
+        <!-- Injected by JS -->
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="products-grid">
+        <!-- Injected by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Dynamic shared footer and WhatsApp FAB injected here -->
+
+  <script type="module">
+    import { initPage } from './js/shared.js';
+    import { PRODUCTS, CATEGORIES } from './js/data.js';
+    import { addToCart, formatPrice } from './js/cart.js';
+    import { fetchProducts } from './js/supabase.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initPage();
+
+      const filtersContainer = document.getElementById('filters-container');
+      const productsGrid = document.getElementById('products-grid');
+
+      let currentCategory = 'todos';
+      let activeProducts = [];
+
+      // Render filters
+      function renderFilters() {
+        filtersContainer.innerHTML = CATEGORIES.map(cat => `
+          <button class="filter-btn ${cat.id === currentCategory ? 'active' : ''}" data-category="${cat.id}">
+            ${cat.label}
+          </button>
+        `).join('');
+
+        // Filter click events
+        filtersContainer.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            currentCategory = btn.getAttribute('data-category');
+            renderFilters();
+            renderProducts();
+          });
+        });
+      }
+
+      // Render products grid
+      function renderProducts() {
+        const filteredProducts = currentCategory === 'todos'
+          ? activeProducts
+          : activeProducts.filter(prod => prod.category === currentCategory);
+
+        if (filteredProducts.length === 0) {
+          productsGrid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 48px; color: var(--gray-text);">
+              Nenhum produto cadastrado nesta categoria no momento.
+            </div>
+          `;
+          return;
+        }
+
+        productsGrid.innerHTML = filteredProducts.map((prod, index) => `
+          <div class="product-card reveal" data-id="${prod.id}" style="animation-delay: ${index * 50}ms">
+            <div class="product-card-image">
+              <img src="${prod.image}" alt="${prod.name}" loading="lazy" />
+              <span class="product-card-tag">${getCategoryLabel(prod.category)}</span>
+            </div>
+            <div class="product-card-content">
+              <h3>${prod.name}</h3>
+              <p class="product-card-desc">${prod.description}</p>
+              <div class="product-card-footer">
+                <span class="product-card-price">${formatPrice(prod.price)}</span>
+                <button class="product-card-btn add-to-cart-btn" aria-label="Adicionar ao Carrinho" data-id="${prod.id}">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        // Apply reveal transitions to dynamic elements
+        const reveals = productsGrid.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+
+        // Add to cart click event handlers
+        productsGrid.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const id = btn.getAttribute('data-id');
+            const product = activeProducts.find(p => p.id === id);
+            if (product) {
+              addToCart(product);
+            }
+          });
+        });
+      }
+
+      function getCategoryLabel(catId) {
+        const cat = CATEGORIES.find(c => c.id === catId);
+        return cat ? cat.label : catId;
+      }
+
+      // Load products from DB or fallback
+      async function loadCatalog() {
+        // Show skeleton/loading state
+        productsGrid.innerHTML = `
+          <div style="grid-column: 1/-1; text-align: center; padding: 64px 24px; color: var(--gray-text);">
+            <div style="width: 36px; height: 36px; border: 2.5px solid rgba(198, 138, 58, 0.2); border-top-color: var(--gold-copper); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 16px;"></div>
+            <p style="font-size: 0.95rem; font-family: var(--font-body); letter-spacing: 0.05em; color: var(--gray-text);">Carregando catálogo R.P Wood...</p>
+          </div>
+        `;
+
+        try {
+          const dbProducts = await fetchProducts();
+          if (dbProducts && dbProducts.length > 0) {
+            activeProducts = dbProducts;
+            console.log('Catálogo carregado com sucesso do Supabase.');
+          } else {
+            console.warn('Supabase retornou catálogo vazio. Utilizando catálogo estático de fallback.');
+            activeProducts = PRODUCTS;
+          }
+        } catch (error) {
+          console.error('Erro ao conectar com Supabase. Utilizando catálogo estático de fallback:', error);
+          activeProducts = PRODUCTS;
+        }
+
+        renderFilters();
+        renderProducts();
+      }
+
+      // Initialize
+      loadCatalog();
+    });
+  </script>
+</body>
+</html>

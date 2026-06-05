@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finalizar Pedido | R.P Wood Personalizados</title>
+  <meta name="description" content="Finalize seu pedido na R.P Wood. Preencha seus dados de entrega e efetue seu pagamento seguro." />
+  <meta name="author" content="R.P Wood Personalizados" />
+  <meta property="og:title" content="Finalizar Pedido | R.P Wood Personalizados" />
+  <meta property="og:description" content="Finalize seu pedido na R.P Wood. Preencha seus dados de entrega e efetue seu pagamento seguro." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- ==================== PAGE HERO ==================== -->
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <img src="/images/products-hero.png" alt="Checkout R.P Wood" loading="eager" />
+      <div class="page-hero-overlay"></div>
+    </div>
+    <div class="page-hero-content reveal">
+      <h1 class="page-hero-title">Finalizar Pedido</h1>
+      <p class="page-hero-subtitle">Preencha os dados abaixo para concluir sua compra com segurança.</p>
+    </div>
+  </section>
+
+  <!-- ==================== CHECKOUT CONTENT ==================== -->
+  <section class="section">
+    <div class="container">
+      <div class="checkout-container reveal" id="checkout-area">
+        
+        <!-- Form wrapper -->
+        <form class="checkout-form-wrapper" id="checkout-form">
+          
+          <!-- Seção 1: Dados Pessoais -->
+          <div class="checkout-section-title">
+            <span>1</span>
+            <h3>Dados Pessoais</h3>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkout-name">Nome Completo</label>
+              <input type="text" id="checkout-name" required placeholder="Ex: João Silva" />
+            </div>
+            <div class="form-group">
+              <label for="checkout-phone">WhatsApp / Telefone</label>
+              <input type="tel" id="checkout-phone" required placeholder="Ex: (51) 99999-9999" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="checkout-email">E-mail</label>
+            <input type="email" id="checkout-email" required placeholder="Ex: joao@email.com" />
+          </div>
+
+          <!-- Seção 2: Entrega -->
+          <div class="checkout-section-title" style="margin-top: 40px;">
+            <span>2</span>
+            <h3>Dados de Entrega</h3>
+          </div>
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="checkout-cep">CEP</label>
+              <input type="text" id="checkout-cep" required placeholder="Ex: 93870-000" />
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+              <label for="checkout-address">Endereço (Rua/Avenida)</label>
+              <input type="text" id="checkout-address" required placeholder="Rua..." />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkout-number">Número</label>
+              <input type="text" id="checkout-number" required placeholder="123" />
+            </div>
+            <div class="form-group">
+              <label for="checkout-complement">Complemento</label>
+              <input type="text" id="checkout-complement" placeholder="Ap 101, Fundos (opcional)" />
+            </div>
+          </div>
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="checkout-neighborhood">Bairro</label>
+              <input type="text" id="checkout-neighborhood" required placeholder="Campo Pinheiro..." />
+            </div>
+            <div class="form-group">
+              <label for="checkout-city">Cidade</label>
+              <input type="text" id="checkout-city" required placeholder="Nova Hartz" />
+            </div>
+            <div class="form-group">
+              <label for="checkout-state">Estado</label>
+              <select id="checkout-state" required>
+                <option value="RS">RS</option>
+                <option value="SC">SC</option>
+                <option value="PR">PR</option>
+                <option value="SP">SP</option>
+                <option value="RJ">RJ</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Seção 3: Pagamento -->
+          <div class="checkout-section-title" style="margin-top: 40px;">
+            <span>3</span>
+            <h3>Forma de Pagamento</h3>
+          </div>
+          
+          <div class="payment-methods">
+            <div class="payment-method-card active" data-method="stripe">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+              </svg>
+              <span>Cartão (Stripe)</span>
+            </div>
+            <div class="payment-method-card" data-method="pix">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M12 8v8M8 12h8"/>
+              </svg>
+              <span>PIX Automático</span>
+            </div>
+            <div class="payment-method-card" data-method="whatsapp">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              <span>Combinar no Whats</span>
+            </div>
+          </div>
+
+          <!-- Painel Stripe -->
+          <div class="payment-details-panel active" id="panel-stripe">
+            <div class="stripe-test-badge">
+              <span class="stripe-badge-dot" style="display:inline-block; width:6px; height:6px; background:#7a73ff; border-radius:50%;"></span>
+              Modo Teste do Stripe Ativo
+            </div>
+            <p style="font-size: 0.8rem; color: var(--gray-text); margin-bottom: 20px;">Use o cartão de testes Stripe: <strong style="color:var(--white);">4242 4242 4242 4242</strong> com qualquer data futura.</p>
+            
+            <div class="form-group">
+              <label for="stripe-card-name">Nome no Cartão</label>
+              <input type="text" id="stripe-card-name" placeholder="Ex: JOAO SILVA" />
+            </div>
+            <div class="form-group">
+              <label for="stripe-card-number">Número do Cartão</label>
+              <input type="text" id="stripe-card-number" placeholder="4242 4242 4242 4242" maxlength="19" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="stripe-card-expiry">Validade</label>
+                <input type="text" id="stripe-card-expiry" placeholder="MM/AA" maxlength="5" />
+              </div>
+              <div class="form-group">
+                <label for="stripe-card-cvc">CVC</label>
+                <input type="text" id="stripe-card-cvc" placeholder="123" maxlength="4" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Painel PIX -->
+          <div class="payment-details-panel" id="panel-pix">
+            <div class="pix-instruction">
+              <p style="font-size: 0.9rem; color: var(--gray-text); margin-bottom: 20px;">
+                Após enviar o formulário, geraremos o QR code do PIX para pagamento simulado.
+              </p>
+            </div>
+          </div>
+
+          <!-- Painel WhatsApp -->
+          <div class="payment-details-panel" id="panel-whatsapp">
+            <p style="font-size: 0.9rem; color: var(--gray-text);">
+              Finalize seu pedido e negocie diretamente a melhor forma de pagamento (Transferência, boleto ou parcelamento) e tire dúvidas sobre a personalização no WhatsApp.
+            </p>
+          </div>
+
+          <button type="submit" class="cart-btn-checkout" style="margin-top: 32px; width: 100%;" id="checkout-submit-btn">
+            <span id="submit-btn-text">Confirmar e Finalizar Pedido</span>
+          </button>
+        </form>
+
+        <!-- Sidebar Summary -->
+        <div class="cart-summary" id="checkout-summary">
+          <!-- Dynamically filled by JS -->
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== GATEWAY LOADING MODAL ==================== -->
+  <div class="lightbox" id="gateway-modal" style="z-index: 12000;">
+    <div class="lightbox-content" style="max-width: 480px; grid-template-columns: 1fr; text-align: center; padding: 40px;">
+      
+      <!-- Spinner panel -->
+      <div id="gateway-loading">
+        <div style="width: 48px; height: 48px; border: 3px solid rgba(198, 138, 58, 0.2); border-top-color: var(--gold-copper); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 24px;"></div>
+        <h3 class="lightbox-title" style="font-size: 1.4rem; margin-bottom: 12px;" id="gateway-loading-title">Processando Pagamento...</h3>
+        <p style="color: var(--gray-text); font-size: 0.9rem;" id="gateway-loading-desc">Conectando ao gateway de pagamento Stripe...</p>
+      </div>
+
+      <!-- PIX Payment Simulation Screen -->
+      <div id="gateway-pix" style="display: none;">
+        <h3 class="lightbox-title" style="font-size: 1.3rem; margin-bottom: 16px;">Pagamento por PIX</h3>
+        <div class="pix-qr-placeholder">
+          <!-- Simple mock QR code using inline SVG vector -->
+          <svg width="130" height="130" viewBox="0 0 24 24" fill="none" stroke="var(--black-matte)" stroke-width="1.5">
+            <rect x="2" y="2" width="6" height="6"/><rect x="16" y="2" width="6" height="6"/><rect x="2" y="16" width="6" height="6"/>
+            <path d="M12 2h2v4h-2zm0 16h2v4h-2zm-6 8h4v2H6zm8-2h2v2h-2zm2-2h4v2h-4zm2-4h2v2h-2z"/>
+          </svg>
+        </div>
+        <div class="stripe-test-badge" style="background:rgba(37, 211, 102, 0.1); color:#25D366; border-color:rgba(37,211,102,0.2);">
+          Aguardando Confirmação do PIX...
+        </div>
+        <p style="font-size: 0.82rem; color: var(--gray-text); margin-bottom: 20px;">Utilize o PIX Copia e Cola para simular a confirmação imediata.</p>
+        <div class="form-group" style="margin-bottom: 24px;">
+          <input type="text" readonly value="rpwoodpersonalizados.pix.key-simulation-code-12345" style="text-align: center; background: rgba(0,0,0,0.5); font-size: 0.8rem;" id="pix-copy-key" />
+          <button class="btn btn-secondary" type="button" style="margin-top: 10px; width: 100%; padding: 8px 16px;" id="pix-copy-btn">Copiar Chave PIX</button>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--gold-copper); font-weight: 500;" id="pix-sim-status">Simulação: Confirmando em 5 segundos...</div>
+      </div>
+
+      <!-- Success Screen -->
+      <div id="gateway-success" style="display: none;">
+        <div style="width: 56px; height: 56px; background: rgba(37, 211, 102, 0.1); color: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 28px;">✓</div>
+        <h3 class="lightbox-title" style="font-size: 1.4rem; margin-bottom: 12px;">Pedido Confirmado!</h3>
+        <p style="color: var(--gray-text); font-size: 0.9rem; margin-bottom: 24px;" id="gateway-success-desc">Seu pagamento foi aprovado com sucesso em nosso gateway (Stripe Modo Teste).</p>
+        <button class="btn btn-primary" type="button" style="width: 100%;" id="gateway-redirect-btn">Finalizar e Abrir WhatsApp</button>
+      </div>
+
+    </div>
+  </div>
+
+  <style>
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- Dynamic shared footer and WhatsApp FAB injected here -->
+
+  <script type="module">
+    import { initPage } from './js/shared.js';
+    import { getCart, getCartTotal, clearCart, formatPrice } from './js/cart.js';
+    import { saveOrder, supabase } from './js/supabase.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initPage();
+
+      const checkoutSummary = document.getElementById('checkout-summary');
+      const checkoutForm = document.getElementById('checkout-form');
+      const cards = document.querySelectorAll('.payment-method-card');
+      const panelStripe = document.getElementById('panel-stripe');
+      const panelPix = document.getElementById('panel-pix');
+      const panelWhatsapp = document.getElementById('panel-whatsapp');
+      
+      const gatewayModal = document.getElementById('gateway-modal');
+      const loaderArea = document.getElementById('gateway-loading');
+      const pixArea = document.getElementById('gateway-pix');
+      const successArea = document.getElementById('gateway-success');
+      
+      const gatewayTitle = document.getElementById('gateway-loading-title');
+      const gatewayDesc = document.getElementById('gateway-loading-desc');
+      const gatewayRedirectBtn = document.getElementById('gateway-redirect-btn');
+      
+      let selectedMethod = 'stripe';
+      const cart = getCart();
+      const total = getCartTotal();
+
+      if (cart.length === 0) {
+        window.location.href = '/carrinho.html';
+        return;
+      }
+
+      // Render summary
+      const itemsList = cart.map(item => `
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 8px;">
+          <span style="color: var(--white);">${item.name} <strong style="color: var(--gold-copper);">x${item.qty}</strong></span>
+          <span>${formatPrice(item.price * item.qty)}</span>
+        </div>
+      `).join('');
+
+      checkoutSummary.innerHTML = `
+        <h3>Resumo do Pedido</h3>
+        <div style="max-height: 250px; overflow-y: auto; margin-bottom: 24px; padding-right: 4px;">
+          ${itemsList}
+        </div>
+        <div class="cart-summary-row">
+          <span>Subtotal</span>
+          <span>${formatPrice(total)}</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Frete</span>
+          <span style="color: #25D366; font-weight: 600;">Grátis</span>
+        </div>
+        <div class="cart-summary-row total" style="margin-bottom: 0;">
+          <span>Total</span>
+          <span>${formatPrice(total)}</span>
+        </div>
+      `;
+
+      // Payment method card toggles
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          cards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          selectedMethod = card.getAttribute('data-method');
+
+          // Toggle inputs panel
+          panelStripe.classList.toggle('active', selectedMethod === 'stripe');
+          panelPix.classList.toggle('active', selectedMethod === 'pix');
+          panelWhatsapp.classList.toggle('active', selectedMethod === 'whatsapp');
+
+          // Stripe inputs validation toggle
+          const stripeInputs = panelStripe.querySelectorAll('input');
+          stripeInputs.forEach(input => {
+            input.required = (selectedMethod === 'stripe');
+          });
+        });
+      });
+
+      // Format card fields
+      const cardNum = document.getElementById('stripe-card-number');
+      const cardExpiry = document.getElementById('stripe-card-expiry');
+      const cardCvc = document.getElementById('stripe-card-cvc');
+
+      cardNum?.addEventListener('input', (e) => {
+        let v = e.target.value.replace(/\D/g, '');
+        v = v.replace(/(\d{4})(?=\d)/g, '$1 ');
+        e.target.value = v.substring(0, 19);
+      });
+
+      cardExpiry?.addEventListener('input', (e) => {
+        let v = e.target.value.replace(/\D/g, '');
+        if (v.length > 2) {
+          v = v.substring(0, 2) + '/' + v.substring(2, 4);
+        }
+        e.target.value = v.substring(0, 5);
+      });
+
+      cardCvc?.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
+      });
+
+      // Submit checkout form
+      checkoutForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Retrieve form fields
+        const name = document.getElementById('checkout-name').value;
+        const phone = document.getElementById('checkout-phone').value;
+        const email = document.getElementById('checkout-email').value;
+        const cep = document.getElementById('checkout-cep').value;
+        const address = document.getElementById('checkout-address').value;
+        const num = document.getElementById('checkout-number').value;
+        const comp = document.getElementById('checkout-complement').value;
+        const neighborhood = document.getElementById('checkout-neighborhood').value;
+        const city = document.getElementById('checkout-city').value;
+        const state = document.getElementById('checkout-state').value;
+
+        const orderDetails = {
+          name, phone, email, cep, address, num, comp, neighborhood, city, state,
+          items: cart,
+          total,
+          paymentMethod: selectedMethod,
+          paymentStatus: selectedMethod === 'whatsapp' ? 'pending_combinar' : 'pending'
+        };
+
+        // Open simulation lightbox
+        gatewayModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Save order immediately in Supabase
+        let dbOrder = null;
+        try {
+          dbOrder = await saveOrder(orderDetails);
+          console.log('Pedido salvo no Supabase:', dbOrder);
+        } catch (err) {
+          console.error('Falha ao salvar no Supabase:', err);
+        }
+
+        // Payment Simulation Flow
+        if (selectedMethod === 'stripe') {
+          // Stripe simulation
+          loaderArea.style.display = 'block';
+          pixArea.style.display = 'none';
+          successArea.style.display = 'none';
+          
+          gatewayTitle.textContent = "Processando Pagamento...";
+          gatewayDesc.textContent = "Conectando ao gateway Stripe em Modo Teste...";
+
+          setTimeout(() => {
+            gatewayTitle.textContent = "Validando Cartão...";
+            gatewayDesc.textContent = "Verificando saldo e autenticação 3D Secure...";
+
+            setTimeout(async () => {
+              // Update payment status in database
+              if (dbOrder) {
+                try {
+                  await supabase
+                    .from('orders')
+                    .update({ payment_status: 'pago_stripe_teste' })
+                    .eq('id', dbOrder.id);
+                  console.log('Status do pagamento atualizado no Supabase.');
+                } catch (dbErr) {
+                  console.error('Erro ao atualizar status do pagamento no DB:', dbErr);
+                }
+              }
+
+              // Success card simulation
+              loaderArea.style.display = 'none';
+              successArea.style.display = 'block';
+              document.getElementById('gateway-success-desc').textContent = "Seu pagamento de " + formatPrice(total) + " foi aprovado com sucesso via Stripe Test Gateway!";
+              
+              // Set WhatsApp redirect action
+              setupWhatsAppRedirect(orderDetails, "Pago (Stripe)");
+            }, 2500);
+          }, 1500);
+
+        } else if (selectedMethod === 'pix') {
+          // PIX Simulation
+          loaderArea.style.display = 'none';
+          pixArea.style.display = 'block';
+          successArea.style.display = 'none';
+
+          // Copy pix key simulation
+          const copyBtn = document.getElementById('pix-copy-btn');
+          const pixKeyInput = document.getElementById('pix-copy-key');
+          copyBtn.addEventListener('click', () => {
+            pixKeyInput.select();
+            document.execCommand('copy');
+            copyBtn.textContent = "Chave Copiada!";
+            setTimeout(() => copyBtn.textContent = "Copiar Chave PIX", 2000);
+          });
+
+          // Countdown simulation
+          let sec = 5;
+          const statusText = document.getElementById('pix-sim-status');
+          const timer = setInterval(() => {
+            sec--;
+            if (sec > 0) {
+              statusText.textContent = `Simulação: Confirmando em ${sec} segundos...`;
+            } else {
+              clearInterval(timer);
+              statusText.textContent = "Pagamento Recebido!";
+              statusText.style.color = "#25D366";
+
+              setTimeout(async () => {
+                // Update payment status in database
+                if (dbOrder) {
+                  try {
+                    await supabase
+                      .from('orders')
+                      .update({ payment_status: 'pago_pix_teste' })
+                      .eq('id', dbOrder.id);
+                    console.log('Status do pagamento PIX atualizado no Supabase.');
+                  } catch (dbErr) {
+                    console.error('Erro ao atualizar status do PIX no DB:', dbErr);
+                  }
+                }
+
+                pixArea.style.display = 'none';
+                successArea.style.display = 'block';
+                document.getElementById('gateway-success-desc').textContent = "O pagamento do seu PIX foi identificado automaticamente!";
+                
+                setupWhatsAppRedirect(orderDetails, "Pago (PIX)");
+              }, 1000);
+            }
+          }, 1000);
+
+        } else {
+          // WhatsApp direct simulation
+          loaderArea.style.display = 'block';
+          pixArea.style.display = 'none';
+          successArea.style.display = 'none';
+          gatewayTitle.textContent = "Processando Pedido...";
+          gatewayDesc.textContent = "Preparando a conversa para envio no WhatsApp...";
+
+          setTimeout(() => {
+            loaderArea.style.display = 'none';
+            successArea.style.display = 'block';
+            document.getElementById('gateway-success-desc').textContent = "Seu pedido foi registrado. Agora vamos fechar os detalhes no WhatsApp.";
+            setupWhatsAppRedirect(orderDetails, "A combinar");
+          }, 1500);
+        }
+      });
+
+      function setupWhatsAppRedirect(order, paymentStatus) {
+        gatewayRedirectBtn.onclick = () => {
+          // Format text message
+          const itemsText = order.items.map(i => `• ${i.name} (x${i.qty}) - ${formatPrice(i.price * i.qty)}`).join('%0A');
+          
+          let addressText = `Endereço: ${order.address}, ${order.num}`;
+          if (order.comp) addressText += ` - ${order.comp}`;
+          addressText += `%0A${order.neighborhood} - ${order.city}/${order.state} - CEP: ${order.cep}`;
+
+          const rawMsg = `*RP WOOD PERSONALIZADOS - NOVO PEDIDO*%0A` +
+            `----------------------------------------%0A` +
+            `*Cliente:* ${order.name}%0A` +
+            `*Email:* ${order.email}%0A` +
+            `*WhatsApp:* ${order.phone}%0A` +
+            `----------------------------------------%0A` +
+            `*Itens do Pedido:*%0A${itemsText}%0A` +
+            `----------------------------------------%0A` +
+            `*Total:* ${formatPrice(order.total)}%0A` +
+            `*Pagamento:* ${order.paymentMethod.toUpperCase()} (${paymentStatus})%0A` +
+            `----------------------------------------%0A` +
+            `${addressText}%0A` +
+            `----------------------------------------%0A` +
+            `Olá Rafael, fiz esse pedido no site e gostaria de confirmar e combinar a personalização das peças!`;
+
+          // Clear local cart
+          clearCart();
+
+          // Redirect to WhatsApp API
+          const whatsappURL = `https://wa.me/5551991962040?text=${rawMsg}`;
+          window.open(whatsappURL, '_blank');
+          
+          // Redirect home
+          window.location.href = '/';
+        };
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coleção | R.P Wood Personalizados</title>
+  <meta name="description" content="Explore a Coleção R.P Wood. Veja móveis sob medida, painéis decorativos, placas corporativas e artigos religiosos entalhados em madeira com CNC." />
+  <meta name="author" content="R.P Wood Personalizados" />
+  <meta property="og:title" content="Coleção | R.P Wood Personalizados" />
+  <meta property="og:description" content="Explore a Coleção R.P Wood. Veja móveis sob medida, painéis decorativos, placas corporativas e artigos religiosos entalhados em madeira com CNC." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- ==================== PAGE HERO ==================== -->
+  <section class="page-hero">
+    <div class="page-hero-bg">
+      <img src="/images/collection-hero.png" alt="Showroom de peças R.P Wood" loading="eager" />
+      <div class="page-hero-overlay"></div>
+    </div>
+    <div class="page-hero-content reveal">
+      <h1 class="page-hero-title">Nossa Coleção</h1>
+      <p class="page-hero-subtitle">Galeria de projetos exclusivos usinados em CNC e finalizados à mão para nossos clientes.</p>
+    </div>
+  </section>
+
+  <!-- ==================== FILTERS & GRID ==================== -->
+  <section class="section">
+    <div class="container">
+      
+      <!-- Filters container -->
+      <div class="filter-container reveal" id="filters-container">
+        <!-- Injected by JS -->
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Injected by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== LIGHTBOX MODAL ==================== -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Fechar galeria">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="lightbox-content">
+      <div class="lightbox-media">
+        <img id="lightbox-img" src="" alt="Imagem ampliada do projeto da coleção" />
+      </div>
+      <div class="lightbox-details">
+        <span class="lightbox-category" id="lightbox-cat">CATEGORIA</span>
+        <h3 class="lightbox-title" id="lightbox-title">Título do Projeto</h3>
+        <p class="lightbox-desc" id="lightbox-desc">Descrição completa do projeto realizado e do tipo de material.</p>
+        <div class="lightbox-specs">
+          <div class="lightbox-spec-item">
+            <span class="lightbox-spec-label">Material</span>
+            <span class="lightbox-spec-value">Madeira Nobre Maciça</span>
+          </div>
+          <div class="lightbox-spec-item">
+            <span class="lightbox-spec-label">Tecnologia</span>
+            <span class="lightbox-spec-value">Corte & Escultura CNC Router</span>
+          </div>
+          <div class="lightbox-spec-item">
+            <span class="lightbox-spec-label">Acabamento</span>
+            <span class="lightbox-spec-value">Óleo Mineral Natural & Seladora</span>
+          </div>
+        </div>
+        <div>
+          <a href="https://wa.me/5551991962040?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20or%C3%A7amento%20para%20um%20projeto%20parecido." class="btn btn-primary" target="_blank" rel="noopener">
+            Solicitar Orçamento Similar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic shared footer and WhatsApp FAB injected here -->
+
+  <script type="module">
+    import { initPage } from './js/shared.js';
+    import { GALLERY_ITEMS, CATEGORIES } from './js/data.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initPage();
+      
+      const filtersContainer = document.getElementById('filters-container');
+      const galleryGrid = document.getElementById('gallery-grid');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxCat = document.getElementById('lightbox-cat');
+      const lightboxTitle = document.getElementById('lightbox-title');
+      const lightboxDesc = document.getElementById('lightbox-desc');
+      const lightboxClose = document.getElementById('lightbox-close');
+
+      let currentCategory = 'todos';
+
+      // Render filters
+      function renderFilters() {
+        filtersContainer.innerHTML = CATEGORIES.map(cat => `
+          <button class="filter-btn ${cat.id === currentCategory ? 'active' : ''}" data-category="${cat.id}">
+            ${cat.label}
+          </button>
+        `).join('');
+
+        // Filter click events
+        filtersContainer.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            currentCategory = btn.getAttribute('data-category');
+            renderFilters();
+            renderGallery();
+          });
+        });
+      }
+
+      // Render gallery grid
+      function renderGallery() {
+        const filteredItems = currentCategory === 'todos' 
+          ? GALLERY_ITEMS 
+          : GALLERY_ITEMS.filter(item => item.category === currentCategory);
+
+        if (filteredItems.length === 0) {
+          galleryGrid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 48px; color: var(--gray-text);">
+              Nenhum projeto encontrado nesta categoria no momento.
+            </div>
+          `;
+          return;
+        }
+
+        galleryGrid.innerHTML = filteredItems.map((item, index) => `
+          <div class="gallery-item reveal" data-id="${item.id}" style="animation-delay: ${index * 50}ms">
+            <img src="${item.image}" alt="${item.name}" loading="lazy" />
+            <div class="gallery-overlay">
+              <span class="gallery-item-category">${getCategoryLabel(item.category)}</span>
+              <h3 class="gallery-item-title">${item.name}</h3>
+            </div>
+          </div>
+        `).join('');
+
+        // Apply reveal transitions to dynamically generated elements
+        const reveals = galleryGrid.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+
+        // Click events to open lightbox
+        galleryGrid.querySelectorAll('.gallery-item').forEach(card => {
+          card.addEventListener('click', () => {
+            const id = card.getAttribute('data-id');
+            const item = GALLERY_ITEMS.find(i => i.id === id);
+            if (item) openLightbox(item);
+          });
+        });
+      }
+
+      function getCategoryLabel(catId) {
+        const cat = CATEGORIES.find(c => c.id === catId);
+        return cat ? cat.label : catId;
+      }
+
+      // Lightbox Handlers
+      function openLightbox(item) {
+        lightboxImg.src = item.image;
+        lightboxImg.alt = item.name;
+        lightboxCat.textContent = getCategoryLabel(item.category);
+        lightboxTitle.textContent = item.name;
+        lightboxDesc.textContent = item.description || 'Projeto customizado esculpido em router CNC com madeira selecionada de alta densidade e acabamento natural de alta resistência.';
+        
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      
+      // Close lightbox clicking outside the content
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      // Escape key to close lightbox
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+          closeLightbox();
+        }
+      });
+
+      // Initialize
+      renderFilters();
+      renderGallery();
+    });
+  </script>
+</body>
+</html>
