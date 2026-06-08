@@ -442,8 +442,14 @@
           pixArea.style.display = 'none';
           successArea.style.display = 'none';
           
-          gatewayTitle.textContent = "Redirecionando...";
-          gatewayDesc.textContent = "Criando sessão de pagamento segura no Stripe...";
+          gatewayTitle.textContent = "Processando...";
+          gatewayDesc.textContent = "Conectando à Stripe para processar seu pagamento...";
+
+          // Retrieve card fields
+          const cardName = document.getElementById('stripe-card-name').value;
+          const cardNum = document.getElementById('stripe-card-number').value;
+          const cardExpiry = document.getElementById('stripe-card-expiry').value;
+          const cardCvc = document.getElementById('stripe-card-cvc').value;
 
           try {
             const response = await fetch('/api/create-checkout-session', {
@@ -451,21 +457,39 @@
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ orderId: dbOrder.id }),
+              body: JSON.stringify({ 
+                orderId: dbOrder.id,
+                card: {
+                  name: cardName,
+                  number: cardNum,
+                  expiry: cardExpiry,
+                  cvc: cardCvc
+                }
+              }),
             });
 
-            const session = await response.json();
-            if (session.url) {
-              window.location.href = session.url;
+            const result = await response.json();
+            if (result.success) {
+              // Direct success inside the site!
+              loaderArea.style.display = 'none';
+              successArea.style.display = 'block';
+              document.getElementById('gateway-success-desc').textContent = `Seu pagamento de ${formatPrice(total)} foi aprovado com sucesso via Stripe!`;
+              
+              setupWhatsAppRedirect(orderDetails, "Pago (Stripe)");
+            } else if (result.url) {
+              // Fallback to redirect if needed
+              gatewayTitle.textContent = "Redirecionando...";
+              gatewayDesc.textContent = "Abrindo página de pagamento externa do Stripe...";
+              window.location.href = result.url;
             } else {
-              throw new Error(session.error || 'Erro desconhecido ao criar sessão');
+              throw new Error(result.error || 'Erro ao processar o pagamento.');
             }
           } catch (stripeErr) {
             console.error('Stripe Integration Error:', stripeErr);
             loaderArea.style.display = 'none';
             gatewayModal.classList.remove('active');
             document.body.style.overflow = '';
-            alert('Erro ao conectar ao Stripe: ' + stripeErr.message);
+            alert('Erro ao processar pagamento com a Stripe: ' + stripeErr.message);
           }
 
         } else if (selectedMethod === 'pix') {
