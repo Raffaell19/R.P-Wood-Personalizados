@@ -75,6 +75,15 @@ export const PRODUCTS = [
     image: '/images/product-8.png',
     details: ['35cm x 12cm', 'Pinus maciço', 'Gravação CNC', 'Equilíbrio gravitacional'],
   },
+  {
+    id: 'prod-009',
+    name: 'Produto de Teste (Stripe)',
+    description: 'Produto de teste com valor de R$ 1,00 para testar o checkout com a Stripe.',
+    price: 1.00,
+    category: 'presentes',
+    image: '/images/product-2.png',
+    details: ['Produto de Teste', 'Valor R$ 1,00', 'Integração Stripe'],
+  },
 ];
 
 export const GALLERY_ITEMS = [

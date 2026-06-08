@@ -430,6 +430,13 @@
           console.error('Falha ao salvar no Supabase:', err);
         }
 
+        if (!dbOrder) {
+          gatewayModal.classList.remove('active');
+          document.body.style.overflow = '';
+          alert('Erro ao salvar o pedido no banco de dados. Por favor, tente novamente ou entre em contato pelo WhatsApp.');
+          return;
+        }
+
         if (selectedMethod === 'stripe') {
           loaderArea.style.display = 'block';
           pixArea.style.display = 'none';
