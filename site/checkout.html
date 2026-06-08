@@ -111,13 +111,7 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
               </svg>
-              <span>Cartão (Stripe)</span>
-            </div>
-            <div class="payment-method-card" data-method="pix">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M12 8v8M8 12h8"/>
-              </svg>
-              <span>PIX Automático</span>
+              <span>Cartão ou PIX (Stripe)</span>
             </div>
             <div class="payment-method-card" data-method="whatsapp">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -134,17 +128,8 @@
               Checkout Seguro Ativo
             </div>
             <p style="font-size: 0.9rem; color: var(--gray-text); margin-top: 12px; line-height: 1.5;">
-              O pagamento por cartão será processado de forma segura diretamente nesta página após a confirmação dos seus dados de entrega.
+              O pagamento por cartão ou PIX será processado de forma segura diretamente nesta página após a confirmação dos seus dados de entrega.
             </p>
-          </div>
-
-          <!-- Painel PIX -->
-          <div class="payment-details-panel" id="panel-pix">
-            <div class="pix-instruction">
-              <p style="font-size: 0.9rem; color: var(--gray-text); margin-bottom: 20px;">
-                Após enviar o formulário, geraremos o QR code do PIX para pagamento simulado.
-              </p>
-            </div>
           </div>
 
           <!-- Painel WhatsApp -->
@@ -187,27 +172,6 @@
         <p style="color: var(--gray-text); font-size: 0.9rem;" id="gateway-loading-desc">Conectando ao gateway de pagamento Stripe...</p>
       </div>
 
-      <!-- PIX Payment Simulation Screen -->
-      <div id="gateway-pix" style="display: none;">
-        <h3 class="lightbox-title" style="font-size: 1.3rem; margin-bottom: 16px;">Pagamento por PIX</h3>
-        <div class="pix-qr-placeholder">
-          <!-- Simple mock QR code using inline SVG vector -->
-          <svg width="130" height="130" viewBox="0 0 24 24" fill="none" stroke="var(--black-matte)" stroke-width="1.5">
-            <rect x="2" y="2" width="6" height="6"/><rect x="16" y="2" width="6" height="6"/><rect x="2" y="16" width="6" height="6"/>
-            <path d="M12 2h2v4h-2zm0 16h2v4h-2zm-6 8h4v2H6zm8-2h2v2h-2zm2-2h4v2h-4zm2-4h2v2h-2z"/>
-          </svg>
-        </div>
-        <div class="stripe-test-badge" style="background:rgba(37, 211, 102, 0.1); color:#25D366; border-color:rgba(37,211,102,0.2);">
-          Aguardando Confirmação do PIX...
-        </div>
-        <p style="font-size: 0.82rem; color: var(--gray-text); margin-bottom: 20px;">Utilize o PIX Copia e Cola para simular a confirmação imediata.</p>
-        <div class="form-group" style="margin-bottom: 24px;">
-          <input type="text" readonly value="rpwoodpersonalizados.pix.key-simulation-code-12345" style="text-align: center; background: rgba(0,0,0,0.5); font-size: 0.8rem;" id="pix-copy-key" />
-          <button class="btn btn-secondary" type="button" style="margin-top: 10px; width: 100%; padding: 8px 16px;" id="pix-copy-btn">Copiar Chave PIX</button>
-        </div>
-        <div style="font-size: 0.8rem; color: var(--gold-copper); font-weight: 500;" id="pix-sim-status">Simulação: Confirmando em 5 segundos...</div>
-      </div>
-
       <!-- Success Screen -->
       <div id="gateway-success" style="display: none;">
         <div style="width: 56px; height: 56px; background: rgba(37, 211, 102, 0.1); color: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 28px;">✓</div>
@@ -239,12 +203,10 @@
       const checkoutForm = document.getElementById('checkout-form');
       const cards = document.querySelectorAll('.payment-method-card');
       const panelStripe = document.getElementById('panel-stripe');
-      const panelPix = document.getElementById('panel-pix');
       const panelWhatsapp = document.getElementById('panel-whatsapp');
       
       const gatewayModal = document.getElementById('gateway-modal');
       const loaderArea = document.getElementById('gateway-loading');
-      const pixArea = document.getElementById('gateway-pix');
       const successArea = document.getElementById('gateway-success');
       
       const gatewayTitle = document.getElementById('gateway-loading-title');
@@ -266,7 +228,6 @@
         gatewayModal.classList.add('active');
         document.body.style.overflow = 'hidden';
         loaderArea.style.display = 'block';
-        pixArea.style.display = 'none';
         successArea.style.display = 'none';
         gatewayTitle.textContent = "Carregando Confirmação...";
         gatewayDesc.textContent = "Obtendo dados do pedido pago no banco de dados...";
@@ -351,10 +312,7 @@
 
           // Toggle inputs panel
           panelStripe.classList.toggle('active', selectedMethod === 'stripe');
-          panelPix.classList.toggle('active', selectedMethod === 'pix');
           panelWhatsapp.classList.toggle('active', selectedMethod === 'whatsapp');
-
-          // Stripe inputs validation (no longer needed for embedded checkout)
         });
       });
 
@@ -404,7 +362,6 @@
 
         if (selectedMethod === 'stripe') {
           loaderArea.style.display = 'block';
-          pixArea.style.display = 'none';
           successArea.style.display = 'none';
           
           gatewayTitle.textContent = "Iniciando checkout...";
@@ -459,61 +416,9 @@
             alert('Erro ao carregar checkout da Stripe: ' + stripeErr.message);
           }
 
-        } else if (selectedMethod === 'pix') {
-          // PIX Simulation
-          loaderArea.style.display = 'none';
-          pixArea.style.display = 'block';
-          successArea.style.display = 'none';
-
-          // Copy pix key simulation
-          const copyBtn = document.getElementById('pix-copy-btn');
-          const pixKeyInput = document.getElementById('pix-copy-key');
-          copyBtn.addEventListener('click', () => {
-            pixKeyInput.select();
-            document.execCommand('copy');
-            copyBtn.textContent = "Chave Copiada!";
-            setTimeout(() => copyBtn.textContent = "Copiar Chave PIX", 2000);
-          });
-
-          // Countdown simulation
-          let sec = 5;
-          const statusText = document.getElementById('pix-sim-status');
-          const timer = setInterval(() => {
-            sec--;
-            if (sec > 0) {
-              statusText.textContent = `Simulação: Confirmando em ${sec} segundos...`;
-            } else {
-              clearInterval(timer);
-              statusText.textContent = "Pagamento Recebido!";
-              statusText.style.color = "#25D366";
-
-              setTimeout(async () => {
-                // Update payment status in database
-                if (dbOrder) {
-                  try {
-                    await supabase
-                      .from('orders')
-                      .update({ payment_status: 'pago_pix_teste' })
-                      .eq('id', dbOrder.id);
-                    console.log('Status do pagamento PIX atualizado no Supabase.');
-                  } catch (dbErr) {
-                    console.error('Erro ao atualizar status do PIX no DB:', dbErr);
-                  }
-                }
-
-                pixArea.style.display = 'none';
-                successArea.style.display = 'block';
-                document.getElementById('gateway-success-desc').textContent = "O pagamento do seu PIX foi identificado automaticamente!";
-                
-                setupWhatsAppRedirect(orderDetails, "Pago (PIX)");
-              }, 1000);
-            }
-          }, 1000);
-
         } else {
           // WhatsApp direct simulation
           loaderArea.style.display = 'block';
-          pixArea.style.display = 'none';
           successArea.style.display = 'none';
           gatewayTitle.textContent = "Processando Pedido...";
           gatewayDesc.textContent = "Preparando a conversa para envio no WhatsApp...";
