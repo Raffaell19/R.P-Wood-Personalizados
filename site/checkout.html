@@ -10,6 +10,7 @@
   <meta property="og:description" content="Finalize seu pedido na R.P Wood. Preencha seus dados de entrega e efetue seu pagamento seguro." />
   <meta property="og:type" content="website" />
   <link rel="stylesheet" href="/style.css" />
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
 
@@ -130,28 +131,11 @@
           <div class="payment-details-panel active" id="panel-stripe">
             <div class="stripe-test-badge">
               <span class="stripe-badge-dot" style="display:inline-block; width:6px; height:6px; background:#7a73ff; border-radius:50%;"></span>
-              Modo Teste do Stripe Ativo
+              Checkout Seguro Ativo
             </div>
-            <p style="font-size: 0.8rem; color: var(--gray-text); margin-bottom: 20px;">Use o cartão de testes Stripe: <strong style="color:var(--white);">4242 4242 4242 4242</strong> com qualquer data futura.</p>
-            
-            <div class="form-group">
-              <label for="stripe-card-name">Nome no Cartão</label>
-              <input type="text" id="stripe-card-name" placeholder="Ex: JOAO SILVA" />
-            </div>
-            <div class="form-group">
-              <label for="stripe-card-number">Número do Cartão</label>
-              <input type="text" id="stripe-card-number" placeholder="4242 4242 4242 4242" maxlength="19" />
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="stripe-card-expiry">Validade</label>
-                <input type="text" id="stripe-card-expiry" placeholder="MM/AA" maxlength="5" />
-              </div>
-              <div class="form-group">
-                <label for="stripe-card-cvc">CVC</label>
-                <input type="text" id="stripe-card-cvc" placeholder="123" maxlength="4" />
-              </div>
-            </div>
+            <p style="font-size: 0.9rem; color: var(--gray-text); margin-top: 12px; line-height: 1.5;">
+              O pagamento por cartão será processado de forma segura diretamente nesta página após a confirmação dos seus dados de entrega.
+            </p>
           </div>
 
           <!-- Painel PIX -->
@@ -181,6 +165,14 @@
         </div>
 
       </div>
+
+      <!-- Stripe Embedded Checkout Container -->
+      <div id="stripe-embedded-checkout-container" style="display: none; width: 100%; max-width: 650px; margin: 0 auto; background: var(--black-matte); padding: 32px; border-radius: 8px; border: 1px solid var(--gold-copper);">
+        <div id="checkout">
+          <!-- Stripe.js will inject the Embedded Checkout here -->
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -362,35 +354,8 @@
           panelPix.classList.toggle('active', selectedMethod === 'pix');
           panelWhatsapp.classList.toggle('active', selectedMethod === 'whatsapp');
 
-          // Stripe inputs validation toggle
-          const stripeInputs = panelStripe.querySelectorAll('input');
-          stripeInputs.forEach(input => {
-            input.required = (selectedMethod === 'stripe');
-          });
+          // Stripe inputs validation (no longer needed for embedded checkout)
         });
-      });
-
-      // Format card fields
-      const cardNum = document.getElementById('stripe-card-number');
-      const cardExpiry = document.getElementById('stripe-card-expiry');
-      const cardCvc = document.getElementById('stripe-card-cvc');
-
-      cardNum?.addEventListener('input', (e) => {
-        let v = e.target.value.replace(/\D/g, '');
-        v = v.replace(/(\d{4})(?=\d)/g, '$1 ');
-        e.target.value = v.substring(0, 19);
-      });
-
-      cardExpiry?.addEventListener('input', (e) => {
-        let v = e.target.value.replace(/\D/g, '');
-        if (v.length > 2) {
-          v = v.substring(0, 2) + '/' + v.substring(2, 4);
-        }
-        e.target.value = v.substring(0, 5);
-      });
-
-      cardCvc?.addEventListener('input', (e) => {
-        e.target.value = e.target.value.replace(/\D/g, '').substring(0, 4);
       });
 
       // Submit checkout form
@@ -442,14 +407,8 @@
           pixArea.style.display = 'none';
           successArea.style.display = 'none';
           
-          gatewayTitle.textContent = "Processando...";
-          gatewayDesc.textContent = "Conectando à Stripe para processar seu pagamento...";
-
-          // Retrieve card fields
-          const cardName = document.getElementById('stripe-card-name').value;
-          const cardNum = document.getElementById('stripe-card-number').value;
-          const cardExpiry = document.getElementById('stripe-card-expiry').value;
-          const cardCvc = document.getElementById('stripe-card-cvc').value;
+          gatewayTitle.textContent = "Iniciando checkout...";
+          gatewayDesc.textContent = "Criando sessão segura de pagamento...";
 
           try {
             const response = await fetch('/api/create-checkout-session', {
@@ -457,39 +416,47 @@
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ 
-                orderId: dbOrder.id,
-                card: {
-                  name: cardName,
-                  number: cardNum,
-                  expiry: cardExpiry,
-                  cvc: cardCvc
-                }
-              }),
+              body: JSON.stringify({ orderId: dbOrder.id }),
             });
 
             const result = await response.json();
-            if (result.success) {
-              // Direct success inside the site!
-              loaderArea.style.display = 'none';
-              successArea.style.display = 'block';
-              document.getElementById('gateway-success-desc').textContent = `Seu pagamento de ${formatPrice(total)} foi aprovado com sucesso via Stripe!`;
-              
-              setupWhatsAppRedirect(orderDetails, "Pago (Stripe)");
-            } else if (result.url) {
-              // Fallback to redirect if needed
-              gatewayTitle.textContent = "Redirecionando...";
-              gatewayDesc.textContent = "Abrindo página de pagamento externa do Stripe...";
-              window.location.href = result.url;
-            } else {
-              throw new Error(result.error || 'Erro ao processar o pagamento.');
+            const clientSecret = result.clientSecret;
+            const pKey = result.publishableKey;
+
+            if (!clientSecret) {
+              throw new Error(result.error || 'Erro ao obter sessão de pagamento.');
             }
+
+            if (!pKey) {
+              alert('Chave pública da Stripe (STRIPE_PUBLISHABLE_KEY) não configurada nas variáveis de ambiente da Vercel. Por favor, adicione-a para renderizar o checkout.');
+              loaderArea.style.display = 'none';
+              gatewayModal.classList.remove('active');
+              document.body.style.overflow = '';
+              return;
+            }
+
+            // Close loading modal
+            gatewayModal.classList.remove('active');
+            document.body.style.overflow = '';
+
+            // Hide the main checkout form and display the Stripe Embedded Checkout container
+            document.getElementById('checkout-area').style.display = 'none';
+            const stripeContainer = document.getElementById('stripe-embedded-checkout-container');
+            stripeContainer.style.display = 'block';
+            
+            // Initialize Stripe and mount Checkout
+            const stripeInstance = Stripe(pKey);
+            const checkoutInstance = await stripeInstance.initEmbeddedCheckout({
+              clientSecret: clientSecret,
+            });
+            checkoutInstance.mount('#checkout');
+
           } catch (stripeErr) {
             console.error('Stripe Integration Error:', stripeErr);
             loaderArea.style.display = 'none';
             gatewayModal.classList.remove('active');
             document.body.style.overflow = '';
-            alert('Erro ao processar pagamento com a Stripe: ' + stripeErr.message);
+            alert('Erro ao carregar checkout da Stripe: ' + stripeErr.message);
           }
 
         } else if (selectedMethod === 'pix') {
