@@ -61,9 +61,6 @@ export default async function handler(req, res) {
 
     // 3. Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
-      automatic_payment_methods: {
-        enabled: true,
-      },
       line_items: lineItems,
       mode: 'payment',
       success_url: `${req.headers.origin}/checkout.html?success=true&session_id={CHECKOUT_SESSION_ID}&order_id=${order.id}`,
