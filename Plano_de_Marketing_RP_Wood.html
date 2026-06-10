@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Plano de Marketing Digital - R.P Wood</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+        
+        :root {
+            --primary: #c68a3a;
+            --primary-dark: #a16e2b;
+            --bg: #faf7f2;
+            --card-bg: #ffffff;
+            --text: #2b261f;
+            --text-muted: #615647;
+            --border: #e6dec9;
+            --alert-bg: #fdfaf4;
+            --alert-border: #d4af37;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(43, 38, 31, 0.05);
+            border: 1px solid var(--border);
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--text);
+            font-weight: 600;
+            margin-top: 1.8em;
+            margin-bottom: 0.6em;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--primary-dark);
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 15px;
+            margin-top: 0;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            margin-top: 2em;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1.2em;
+            text-align: justify;
+        }
+
+        ul {
+            margin-top: 0;
+            margin-bottom: 1.5em;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: var(--border);
+            margin: 2.5em 0;
+        }
+
+        /* Tables styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: #f7f2e8;
+            color: var(--text);
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fbfaf7;
+        }
+
+        /* Alert block / Blockquote styling */
+        blockquote {
+            margin: 1.5em 0;
+            padding: 15px 20px;
+            background-color: var(--alert-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            font-style: italic;
+        }
+
+        .alert-box {
+            margin: 1.5em 0;
+            padding: 15px 20px;
+            border-radius: 6px;
+            border-left: 4px solid var(--primary);
+            background-color: #fdfaf2;
+        }
+
+        .alert-box.important {
+            background-color: #fff9e6;
+            border-left-color: #f5b041;
+        }
+
+        .alert-box.tip {
+            background-color: #eaf2f8;
+            border-left-color: #2980b9;
+        }
+
+        .alert-box.caution {
+            background-color: #fdf2f2;
+            border-left-color: #e74c3c;
+        }
+
+        .alert-title {
+            font-weight: 700;
+            margin-bottom: 5px;
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Code and preformatted text */
+        pre {
+            background: #2b261f;
+            color: #f5f0e6;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin: 1.5em 0;
+            border: 1px solid #1a1612;
+        }
+
+        code {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9em;
+            background-color: #f3eedf;
+            color: #a16e2b;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        .header-doc {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* Print optimization */
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                border: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            h1, h2, h3, h4 {
+                page-break-after: avoid;
+            }
+            tr, blockquote, pre, .alert-box {
+                page-break-inside: avoid;
+            }
+            a {
+                text-decoration: none;
+                color: var(--text);
+            }
+        }
+    </style>
+    
+</head>
+<body>
+  <div class="container">
+    <div class="header-doc">
+    </div>
+<h1>🪵 Plano de Marketing Digital 360° — R.P Wood Personalizados</h1>
+<blockquote>
+**Objetivo:** Transformar presença digital zero em uma máquina de atração de clientes, utilizando redes sociais, SEO técnico e Google Business Profile como canais de aquisição.
+</blockquote>
+<hr>
+<h2>📊 Diagnóstico Atual</h2>
+<h3>✅ O que já temos (Pontos Fortes)</h3>
+<ul>
+  <li>Site profissional pronto e publicado na Vercel (<code>rpwoodpersonalizados.vercel.app</code>)</li>
+  <li>Checkout com Stripe integrado + Supabase</li>
+  <li>Catálogo de produtos com imagens e preços</li>
+  <li>WhatsApp comercial configurado (51 99196-2040)</li>
+  <li>Marca visual definida (Brand Guidelines, logo, paleta de cores)</li>
+  <li>Estratégia de conteúdo esboçada + 1 roteiro de carrossel já escrito</li>
+  <li>Links de Instagram e Facebook já no footer do site</li>
+</ul>
+<h3>❌ O que está faltando (Gaps Críticos)</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Área</th>
+      <th>Problema</th>
+      <th>Impacto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>SEO Técnico</strong></td>
+      <td>Sem <code>robots.txt</code></td>
+      <td>Google não sabe o que indexar</td>
+    </tr>
+    <tr>
+      <td><strong>SEO Técnico</strong></td>
+      <td>Sem <code>sitemap.xml</code></td>
+      <td>Páginas podem não ser encontradas</td>
+    </tr>
+    <tr>
+      <td><strong>SEO Técnico</strong></td>
+      <td>Sem tags <code><link rel="canonical"></code></td>
+      <td>Risco de conteúdo duplicado</td>
+    </tr>
+    <tr>
+      <td><strong>SEO Técnico</strong></td>
+      <td>Sem Schema.org (LocalBusiness, Product)</td>
+      <td>Sem rich snippets no Google</td>
+    </tr>
+    <tr>
+      <td><strong>SEO Técnico</strong></td>
+      <td>Sem <code><link rel="icon"></code> (favicon)</td>
+      <td>Aparência amadora nas abas</td>
+    </tr>
+    <tr>
+      <td><strong>SEO Técnico</strong></td>
+      <td>Sem <code>og:url</code> e <code>og:image</code> absolutos</td>
+      <td>Compartilhamentos sem imagem</td>
+    </tr>
+    <tr>
+      <td><strong>SEO Técnico</strong></td>
+      <td>Copyright do footer diz "2025"</td>
+      <td>Desatualizado</td>
+    </tr>
+    <tr>
+      <td><strong>Google Business</strong></td>
+      <td>Perfil não otimizado / sem posts</td>
+      <td>Invisível em buscas locais</td>
+    </tr>
+    <tr>
+      <td><strong>Redes Sociais</strong></td>
+      <td>Zero publicações</td>
+      <td>Nenhuma presença ativa</td>
+    </tr>
+    <tr>
+      <td><strong>Tráfego Pago</strong></td>
+      <td>Nenhuma campanha ativa</td>
+      <td>Nenhum tráfego de conversão</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h2>🎯 Estratégia em 3 Frentes</h2>
+<pre><code class="language-">
+┌─────────────────────────────────────────────────────────┐
+│                  ATRAIR CLIENTES AGORA                  │
+├──────────────┬──────────────────┬───────────────────────┤
+│  FRENTE 1    │     FRENTE 2     │      FRENTE 3         │
+│  SEO + Site  │  Google Business │  Redes Sociais        │
+│  (Fundação)  │  (Busca Local)   │  (Descoberta + Venda) │
+└──────────────┴──────────────────┴───────────────────────┘
+</code></pre>
+<hr>
+<h2>🔧 FRENTE 1: SEO Técnico do Site</h2>
+<blockquote>
+Ações que eu vou implementar diretamente no código do site.
+</blockquote>
+<h3>1.1 Arquivos Essenciais (Criar)</h3>
+<h4>[NEW] `robots.txt`</h4>
+<pre><code class="language-">
+User-agent: *
+Allow: /
+Sitemap: https://rpwoodpersonalizados.vercel.app/sitemap.xml
+</code></pre>
+<h4>[NEW] `sitemap.xml`</h4>
+<p>Mapa de todas as 7 páginas com datas de última modificação para o Google indexar.</p>
+<h3>1.2 Schema.org — Dados Estruturados</h3>
+<h4>LocalBusiness (em todas as páginas)</h4>
+<pre><code class="language-json">
+{
+"@type": "LocalBusiness",
+"name": "R.P Wood Personalizados",
+"address": {
+"streetAddress": "Rua Lineia Maria Gewerh, 420",
+"addressLocality": "Nova Hartz",
+"addressRegion": "RS",
+"postalCode": "93890-000"
+},
+"telephone": "+5551991962040",
+"url": "https://rpwoodpersonalizados.vercel.app"
+}
+</code></pre>
+<h4>Product (na página de produtos)</h4>
+<p>Cada produto com nome, preço, imagem, disponibilidade e avaliação agregada.</p>
+<h3>1.3 Meta Tags Avançadas (em todas as páginas)</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Tag</th>
+      <th>Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code><link rel="canonical"></code></td>
+      <td>Adicionar URL canônica em cada página</td>
+    </tr>
+    <tr>
+      <td><code><link rel="icon"></code></td>
+      <td>Referenciar o favicon.svg que já existe</td>
+    </tr>
+    <tr>
+      <td><code>og:url</code></td>
+      <td>URLs absolutas em todas as páginas</td>
+    </tr>
+    <tr>
+      <td><code>og:image</code></td>
+      <td>URL absoluta da imagem OG</td>
+    </tr>
+    <tr>
+      <td>Twitter Cards</td>
+      <td>Adicionar <code>twitter:card</code>, <code>twitter:title</code>, <code>twitter:description</code></td>
+    </tr>
+    <tr>
+      <td><code>meta robots</code></td>
+      <td><code>index, follow</code> em todas as páginas</td>
+    </tr>
+  </tbody>
+</table>
+<h3>1.4 Atualização de Copyright</h3>
+<ul>
+  <li>Footer: Alterar "2025" para "2026"</li>
+</ul>
+<hr>
+<h2>🗺️ FRENTE 2: Google Business Profile (Perfil de Empresa)</h2>
+<div class="alert-box important"><div class="alert-title">Importante</div>
+O Google Business Profile é o canal mais rápido para aparecer em buscas locais como "marcenaria personalizada Nova Hartz" ou "presentes em madeira RS". Preciso que você confirme se já tem um Perfil de Empresa Google criado e verificado.
+</div>
+<h3>2.1 Configuração do Perfil</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Campo</th>
+      <th>Valor Recomendado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Nome da Empresa</strong></td>
+      <td>R.P Wood Personalizados</td>
+    </tr>
+    <tr>
+      <td><strong>Categoria Principal</strong></td>
+      <td>Fabricante de Móveis Sob Medida</td>
+    </tr>
+    <tr>
+      <td><strong>Categorias Secundárias</strong></td>
+      <td>Loja de Presentes Personalizados, Artesão em Madeira</td>
+    </tr>
+    <tr>
+      <td><strong>Endereço</strong></td>
+      <td>Rua Lineia Maria Gewerh, 420 – Campo Pinheiro, Nova Hartz, RS – 93890-000</td>
+    </tr>
+    <tr>
+      <td><strong>Telefone</strong></td>
+      <td>+55 51 99196-2040</td>
+    </tr>
+    <tr>
+      <td><strong>WhatsApp</strong></td>
+      <td>+55 51 99196-2040</td>
+    </tr>
+    <tr>
+      <td><strong>Website</strong></td>
+      <td>https://rpwoodpersonalizados.vercel.app</td>
+    </tr>
+    <tr>
+      <td><strong>Horário</strong></td>
+      <td>Seg–Sex: 08:00–18:00 / Sáb: 08:00–12:00</td>
+    </tr>
+    <tr>
+      <td><strong>Descrição</strong></td>
+      <td>"A R.P Wood Personalizados transforma suas ideias em peças únicas de madeira com tecnologia CNC Router de alta precisão. Criamos móveis sob medida, decoração, brindes corporativos, artigos para igrejas e presentes personalizados com acabamento premium. Localizada em Nova Hartz, RS, atendemos todo o Rio Grande do Sul e enviamos para todo o Brasil. Solicite seu orçamento!"</td>
+    </tr>
+  </tbody>
+</table>
+<h3>2.2 Fotos e Vídeos para o Perfil</h3>
+<p>Faça upload de pelo menos <strong>15–20 fotos</strong> divididas assim:</p>
+<table>
+  <thead>
+    <tr>
+      <th>Categoria</th>
+      <th>O que postar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Logo</strong></td>
+      <td>Sua logo em alta resolução</td>
+    </tr>
+    <tr>
+      <td><strong>Capa</strong></td>
+      <td>A melhor foto/montagem do seu trabalho</td>
+    </tr>
+    <tr>
+      <td><strong>Oficina/Fachada</strong></td>
+      <td>3-4 fotos do espaço de trabalho com a CNC</td>
+    </tr>
+    <tr>
+      <td><strong>Produtos</strong></td>
+      <td>8-10 fotos das melhores peças (tábuas, quadros, púlpitos, letreiros)</td>
+    </tr>
+    <tr>
+      <td><strong>Processo</strong></td>
+      <td>2-3 fotos ou vídeos curtos da CNC trabalhando</td>
+    </tr>
+    <tr>
+      <td><strong>Equipe</strong></td>
+      <td>1-2 fotos suas trabalhando (gera confiança)</td>
+    </tr>
+  </tbody>
+</table>
+<h3>2.3 Posts no Google Business (Semanais)</h3>
+<p>O Google Business tem funcionalidade de posts! Faça <strong>2 posts por semana</strong>:</p>
+<ul>
+  <li><strong>Novidade:</strong> Foto de peça finalizada + breve descrição + link para o WhatsApp</li>
+  <li><strong>Oferta:</strong> Promoção pontual ou destaque de produto com botão de CTA</li>
+</ul>
+<h3>2.4 Avaliações (VITAL)</h3>
+<div class="alert-box caution"><div class="alert-title">Atenção</div>
+**PRIORIDADE MÁXIMA.** Perfis com 0 avaliações são praticamente invisíveis. Peça avaliações para amigos, familiares e qualquer pessoa que já recebeu um trabalho seu.
+</div>
+<p><strong>Meta inicial:</strong> Conseguir <strong>10 avaliações 5★</strong> nos primeiros 30 dias.</p>
+<p><strong>Como pedir:</strong></p>
+<ul>
+  <li>Envie o link direto de avaliação pelo WhatsApp após cada entrega</li>
+  <li>Mensagem: *"Oi [Nome]! Muito obrigado pela confiança no nosso trabalho! 😊 Se puder deixar sua avaliação no Google, ajuda MUITO a gente. Leva menos de 1 minuto: [link]. Obrigado!"*</li>
+</ul>
+<hr>
+<h2>📱 FRENTE 3: Redes Sociais — Estratégia de Conteúdo</h2>
+<h3>3.1 Configuração das Contas</h3>
+<h4>Instagram (`@rpwoodpersonalizados`)</h4>
+<ul>
+  <li>Conta <strong>Comercial</strong> (para acesso a insights e anúncios)</li>
+  <li>Bio sugerida:</li>
+<pre><code class="language-">
+🪵 Peças exclusivas em madeira com CNC
+🏠 Decoração • Presentes • Móveis • Igrejas
+📍 Nova Hartz, RS | Envio Brasil
+🔗 Solicite orçamento 👇
+</code></pre>
+  <li>Link na bio: <code>https://rpwoodpersonalizados.vercel.app</code></li>
+  <li>Destaques dos Stories: <code>Bastidores</code> | <code>Produtos</code> | <code>Depoimentos</code> | <code>Encomendas</code> | <code>Orçamento</code></li>
+</ul>
+<h4>Facebook (Página já criada: `61590214186519`)</h4>
+<ul>
+  <li>Sincronizar informações com Google Business (NAP idêntico)</li>
+  <li>Configurar WhatsApp Business como botão de ação</li>
+  <li>Publicar conteúdo espelhado do Instagram</li>
+</ul>
+<h4>TikTok (`@rpwoodpersonalizados`)</h4>
+<ul>
+  <li>Foco em vídeos curtos de processo (CNC cortando, acabamento, before/after)</li>
+  <li>Bio: <code>Madeira + CNC = Arte 🪵🔥 | Nova Hartz, RS</code></li>
+</ul>
+<h4>YouTube (`R.P Wood Personalizados`)</h4>
+<ul>
+  <li>Foco em vídeos mais longos (3-10 min): processos completos, tutoriais, tours pela oficina</li>
+  <li>Shorts reaproveitando conteúdo do TikTok/Reels</li>
+</ul>
+<h3>3.2 Os 4 Pilares de Conteúdo</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Pilar</th>
+      <th>% do Feed</th>
+      <th>Objetivo</th>
+      <th>Formato Principal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>🔥 <strong>Bastidores</strong></td>
+      <td>40%</td>
+      <td>Prender atenção, gerar curiosidade</td>
+      <td>Reels/TikTok (CNC em ação, lixamento ASMR, acabamento)</td>
+    </tr>
+    <tr>
+      <td>🏠 <strong>Produto em Contexto</strong></td>
+      <td>25%</td>
+      <td>Vender o estilo de vida</td>
+      <td>Fotos/Carrosséis (peça no ambiente real)</td>
+    </tr>
+    <tr>
+      <td>🧠 <strong>Autoridade/Educação</strong></td>
+      <td>20%</td>
+      <td>Gerar salvamentos e compartilhamentos</td>
+      <td>Carrosséis educativos, Reels explicativos</td>
+    </tr>
+    <tr>
+      <td>💬 <strong>Prova Social</strong></td>
+      <td>15%</td>
+      <td>Gerar confiança e conversão</td>
+      <td>Depoimentos, reações de clientes, unboxing</td>
+    </tr>
+  </tbody>
+</table>
+<h3>3.3 Formatos que Convertem em Vendas</h3>
+<div class="alert-box tip"><div class="alert-title">Dica</div>
+Você já tem vídeos da máquina CNC trabalhando! Esses vídeos são **ouro puro** para redes sociais. Vídeos de fabricação são hipnotizantes e geram muito engajamento orgânico.
+</div>
+<h4>🎬 Reels/TikTok que Vendem (roteiro-padrão):</h4>
+<pre><code class="language-">
+[0-1s]  HOOK: Close extremo da CNC cortando (som real da máquina)
+[1-3s]  Texto na tela: "De um pedaço de madeira bruta..."
+[3-5s]  Transição rápida → Peça tomando forma
+[5-8s]  Acabamento manual (lixamento, óleo, verniz)
+[8-10s] Texto: "...para uma peça que vale ouro"
+[10-12s] REVEAL: Produto final pronto, filmado com boa luz
+[12-15s] CTA na tela: "Quer uma peça exclusiva? Link na bio 👆"
+</code></pre>
+<h4>📸 Carrossel de Alta Conversão (já temos o roteiro do Carrossel 01)</h4>
+<ul>
+  <li>Slide 1: Hook visual forte (CNC em ação)</li>
+  <li>Slides 2-5: Processo passo a passo</li>
+  <li>Slide 6: CTA + logo + contato</li>
+</ul>
+<h3>3.4 Hashtags Estratégicas</h3>
+<p><strong>Hashtags principais (usar de 10-15 por post):</strong></p>
+<pre><code class="language-">
+#rpwood #madeiraPersonalizada #cncrouter #gravacaocnc
+#presentePersonalizado #decoracaoMadeira #moveissobmedida
+#artesanatoPremium #feitoEmMadeira #marcenariaModerna
+#brindescorporativos #presentes2026 #novaHartz #artesanatoRS
+#madeiraDeVerdade
+</code></pre>
+<p><strong>Hashtags de nicho (alternar por post):</strong></p>
+<pre><code class="language-">
+#tabuaDeCorte #quadroDecoratico #portaChaves #letreiro3d
+#pulpitoIgreja #decoracaoIgreja #brindeCorporativo
+#presenteDeCasamento #decoracaoIndustrial
+</code></pre>
+<hr>
+<h2>📅 Calendário de Conteúdo — Primeiros 30 Dias</h2>
+<div class="alert-box important"><div class="alert-title">Importante</div>
+O segredo dos primeiros 30 dias é **constância + qualidade**. Poste **pelo menos 4-5 vezes por semana** no Instagram/Facebook e **3 vezes por semana** no TikTok.
+</div>
+<h3>Semana 1 — "Chegamos!" (Lançamento)</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Dia</th>
+      <th>Plataforma</th>
+      <th>Formato</th>
+      <th>Conteúdo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Seg</strong></td>
+      <td>IG + FB</td>
+      <td><strong>Reels</strong></td>
+      <td>🎬 "Quem somos" — Vídeo curto (15-30s): cenas da oficina, CNC em ação, peça pronta. Texto: *"Isso é a R.P Wood. Transformamos madeira em exclusividade."*</td>
+    </tr>
+    <tr>
+      <td><strong>Ter</strong></td>
+      <td>IG + FB</td>
+      <td><strong>Carrossel</strong></td>
+      <td>📸 Carrossel 01 (Bastidores) — usar o roteiro que já criamos!</td>
+    </tr>
+    <tr>
+      <td><strong>Qua</strong></td>
+      <td>TikTok</td>
+      <td><strong>Vídeo</strong></td>
+      <td>🎬 CNC cortando com som real + texto: "Quando a tecnologia encontra a madeira..."</td>
+    </tr>
+    <tr>
+      <td><strong>Qui</strong></td>
+      <td>IG Stories</td>
+      <td><strong>Stories</strong></td>
+      <td>🔄 Tour pela oficina (3-5 stories com enquete: "O que vocês querem ver a gente fazer?")</td>
+    </tr>
+    <tr>
+      <td><strong>Sex</strong></td>
+      <td>IG + FB</td>
+      <td><strong>Post foto</strong></td>
+      <td>📸 Melhor peça finalizada em cenário bonito + legenda contando a história</td>
+    </tr>
+    <tr>
+      <td><strong>Sáb</strong></td>
+      <td>TikTok</td>
+      <td><strong>Vídeo</strong></td>
+      <td>🎬 Before/After: madeira bruta → peça pronta (transição criativa)</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Semana 2 — "Mostra o que a gente faz"</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Dia</th>
+      <th>Plataforma</th>
+      <th>Formato</th>
+      <th>Conteúdo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Seg</strong></td>
+      <td>IG + FB</td>
+      <td><strong>Reels</strong></td>
+      <td>🎬 "3 coisas que você não sabia sobre corte CNC" (educativo + bastidores)</td>
+    </tr>
+    <tr>
+      <td><strong>Ter</strong></td>
+      <td>TikTok</td>
+      <td><strong>Vídeo</strong></td>
+      <td>🎬 ASMR de lixamento + acabamento em óleo (sons reais, sem música)</td>
+    </tr>
+    <tr>
+      <td><strong>Qua</strong></td>
+      <td>IG + FB</td>
+      <td><strong>Carrossel</strong></td>
+      <td>📸 "5 Ideias de Presentes Personalizados em Madeira" (catálogo visual)</td>
+    </tr>
+    <tr>
+      <td><strong>Qui</strong></td>
+      <td>IG Stories</td>
+      <td><strong>Stories</strong></td>
+      <td>🔄 Caixa de perguntas: "Qual peça você gostaria de ter em casa?"</td>
+    </tr>
+    <tr>
+      <td><strong>Sex</strong></td>
+      <td>IG + FB + TT</td>
+      <td><strong>Reels</strong></td>
+      <td>🎬 Peça sendo gravada com nome/logo (close extremo) → Reveal final</td>
+    </tr>
+    <tr>
+      <td><strong>Dom</strong></td>
+      <td>YouTube</td>
+      <td><strong>Short</strong></td>
+      <td>🎬 Compilação dos melhores momentos da semana</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Semana 3 — "Prova Social e Conexão"</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Dia</th>
+      <th>Plataforma</th>
+      <th>Formato</th>
+      <th>Conteúdo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Seg</strong></td>
+      <td>IG + FB</td>
+      <td><strong>Reels</strong></td>
+      <td>🎬 Depoimento em texto (print de WhatsApp com elogio de cliente + vídeo da peça)</td>
+    </tr>
+    <tr>
+      <td><strong>Ter</strong></td>
+      <td>TikTok</td>
+      <td><strong>Vídeo</strong></td>
+      <td>🎬 "POV: você encomendou um presente personalizado" (unboxing simulado)</td>
+    </tr>
+    <tr>
+      <td><strong>Qua</strong></td>
+      <td>IG + FB</td>
+      <td><strong>Post</strong></td>
+      <td>📸 Produto em contexto: tábua em churrasco / quadro na parede decorada</td>
+    </tr>
+    <tr>
+      <td><strong>Qui</strong></td>
+      <td>IG Stories</td>
+      <td><strong>Stories</strong></td>
+      <td>🔄 Enquete: "Tábua de corte ou porta-chaves? Qual presente é mais especial?"</td>
+    </tr>
+    <tr>
+      <td><strong>Sex</strong></td>
+      <td>IG + FB</td>
+      <td><strong>Carrossel</strong></td>
+      <td>📸 "Como cuidar da sua peça de madeira" (educativo — gera MUITOS salvamentos)</td>
+    </tr>
+    <tr>
+      <td><strong>Sáb</strong></td>
+      <td>TikTok</td>
+      <td><strong>Vídeo</strong></td>
+      <td>🎬 Speed-run de um projeto inteiro em 30 segundos</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Semana 4 — "Conversão e Vendas"</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Dia</th>
+      <th>Plataforma</th>
+      <th>Formato</th>
+      <th>Conteúdo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Seg</strong></td>
+      <td>IG + FB</td>
+      <td><strong>Reels</strong></td>
+      <td>🎬 "Peça um orçamento. É grátis. É rápido. E o resultado é esse 👆" (CTA direto)</td>
+    </tr>
+    <tr>
+      <td><strong>Ter</strong></td>
+      <td>TikTok</td>
+      <td><strong>Vídeo</strong></td>
+      <td>🎬 "Quando o cliente vê a peça pronta pela primeira vez" (reação real ou encenada)</td>
+    </tr>
+    <tr>
+      <td><strong>Qua</strong></td>
+      <td>IG + FB</td>
+      <td><strong>Carrossel</strong></td>
+      <td>📸 Catálogo: "Presentes de Dia dos Pais em Madeira" (ou data sazonal próxima)</td>
+    </tr>
+    <tr>
+      <td><strong>Qui</strong></td>
+      <td>IG Stories</td>
+      <td><strong>Stories</strong></td>
+      <td>🔄 Bastidores de embalagem + despacho de encomenda</td>
+    </tr>
+    <tr>
+      <td><strong>Sex</strong></td>
+      <td>IG + FB</td>
+      <td><strong>Reels</strong></td>
+      <td>🎬 COMPILAÇÃO: Top 5 peças mais bonitas (montagem épica com música motivante)</td>
+    </tr>
+    <tr>
+      <td><strong>Sáb</strong></td>
+      <td>YouTube</td>
+      <td><strong>Vídeo longo</strong></td>
+      <td>🎬 "Tour Completo pela Oficina R.P Wood" (3-5 min, mostrando tudo)</td>
+    </tr>
+    <tr>
+      <td><strong>Dom</strong></td>
+      <td>Todas</td>
+      <td><strong>Post</strong></td>
+      <td>📸 Retrospectiva do mês + agradecimento + CTA: "Mês que vem tem novidade!"</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h2>🚀 Ações Rápidas para Primeiros Clientes (Quick Wins)</h2>
+<div class="alert-box important"><div class="alert-title">Importante</div>
+Essas ações geram resultado em **dias, não meses.**
+</div>
+<h3>1. WhatsApp Business — Catálogo</h3>
+<ul>
+  <li>Configure o <strong>Catálogo do WhatsApp Business</strong> com fotos, descrições e preços dos produtos</li>
+  <li>Crie uma mensagem automática de boas-vindas profissional</li>
+  <li>Status do WhatsApp: Poste fotos/vídeos diariamente (muita gente vê!)</li>
+</ul>
+<h3>2. Grupos Locais do Facebook</h3>
+<ul>
+  <li>Entre em grupos de <strong>Nova Hartz</strong>, <strong>Parobé</strong>, <strong>Sapiranga</strong>, <strong>Campo Bom</strong>, <strong>Novo Hamburgo</strong> e <strong>Vale dos Sinos</strong></li>
+  <li>Publique 1-2x por semana nesses grupos oferecendo serviços (de forma orgânica, não spam)</li>
+  <li>Exemplo: *"Alguém aqui já pensou em personalizar a decoração da casa com peças em madeira? A gente faz projetos exclusivos com CNC aqui em Nova Hartz! Orçamento gratuito pelo WhatsApp 😊"*</li>
+</ul>
+<h3>3. Primeiras Vendas com Preço de Lançamento</h3>
+<ul>
+  <li>Ofereça <strong>10-20% de desconto</strong> nos primeiros 10 pedidos via redes sociais</li>
+  <li>Condição: O cliente posta foto/vídeo com a peça e marca <code>@rpwoodpersonalizados</code></li>
+  <li>Isso gera <strong>prova social gratuita</strong> e alimenta seu perfil com UGC (User-Generated Content)</li>
+</ul>
+<h3>4. Parcerias Locais</h3>
+<ul>
+  <li><strong>Igrejas:</strong> Ofereça fazer uma peça de demonstração (púlpito simples, placa) para a igreja que você frequenta. Pastores indicam para outras igrejas</li>
+  <li><strong>Empresas locais:</strong> Ofereça 1-2 brindes de amostra para empresários da região</li>
+  <li><strong>Influencers locais:</strong> Procure microinfluenciadores de Nova Hartz/Vale dos Sinos (1K-10K seguidores) e ofereça uma peça em troca de divulgação</li>
+</ul>
+<h3>5. Marketplace do Facebook</h3>
+<ul>
+  <li>Publique seus produtos no <strong>Marketplace do Facebook</strong> (grátis!)</li>
+  <li>Funciona especialmente bem para buscas locais de presentes e decoração</li>
+</ul>
+<hr>
+<h2>🔍 SEO do Site — Melhorias Técnicas (Eu Faço)</h2>
+<h3>Resumo das mudanças no código:</h3>
+<h4>[NEW] `site/public/robots.txt`</h4>
+<p>Arquivo para orientar os rastreadores do Google.</p>
+<h4>[NEW] `site/public/sitemap.xml`</h4>
+<p>Mapa de todas as 7 páginas do site.</p>
+<h4>[MODIFY] Todas as páginas HTML (6 páginas)</h4>
+<ul>
+  <li>Adicionar <code><link rel="canonical"></code></li>
+  <li>Adicionar <code><link rel="icon"></code></li>
+  <li>Adicionar meta tags Twitter Cards</li>
+  <li>Adicionar <code>og:url</code> com URL absoluta</li>
+  <li>Corrigir <code>og:image</code> para URL absoluta</li>
+</ul>
+<h4>[MODIFY] `site/index.html`</h4>
+<ul>
+  <li>Adicionar Schema.org <code>LocalBusiness</code> + <code>WebSite</code></li>
+</ul>
+<h4>[MODIFY] `site/produtos.html`</h4>
+<ul>
+  <li>Adicionar Schema.org <code>Product</code> para cada item</li>
+</ul>
+<h4>[MODIFY] `site/contato.html`</h4>
+<ul>
+  <li>Adicionar Schema.org <code>LocalBusiness</code> completo com <code>openingHours</code></li>
+</ul>
+<h4>[MODIFY] `site/js/components.js`</h4>
+<ul>
+  <li>Atualizar copyright de "2025" para "2026"</li>
+  <li>Adicionar links de TikTok e YouTube no footer</li>
+</ul>
+<hr>
+<h2>Open Questions</h2>
+<div class="alert-box important"><div class="alert-title">Importante</div>
+**Preciso das suas respostas para avançar:**
+
+1. **Google Business Profile:** Você já criou e verificou um Perfil de Empresa no Google? Se não, quer que eu te guie no passo a passo?
+
+2. **Links das Redes:** Você já criou as contas no TikTok e YouTube? Se sim, quais são os links/usernames?
+
+3. **Domínio personalizado:** Você tem ou pretende comprar um domínio próprio (ex: `rpwoodpersonalizados.com.br`)? Isso impacta muito o SEO.
+
+4. **Tráfego pago:** Você tem orçamento mensal para investir em anúncios pagos no Instagram/Facebook? (Mesmo R$ 10-20/dia já faz diferença enorme para começar)
+
+5. **Devo implementar agora as melhorias de SEO técnico no código do site?** (robots.txt, sitemap.xml, Schema.org, meta tags, etc.)
+</div>
+<hr>
+<h2>Verification Plan</h2>
+<h3>SEO Técnico</h3>
+<ul>
+  <li>Validar Schema.org com <a href="https://search.google.com/test/rich-results">Google Rich Results Test</a></li>
+  <li>Verificar <code>robots.txt</code> acessível via <code>https://rpwoodpersonalizados.vercel.app/robots.txt</code></li>
+  <li>Submeter sitemap no Google Search Console</li>
+  <li>Build do Vite sem erros</li>
+</ul>
+<h3>Google Business</h3>
+<ul>
+  <li>Verificação manual: perfil aparece em busca "R.P Wood Personalizados"</li>
+  <li>Categoria correta exibida nos resultados</li>
+</ul>
+<h3>Redes Sociais</h3>
+<ul>
+  <li>Contas criadas e configuradas conforme especificações</li>
+  <li>Primeira semana de conteúdo publicada</li>
+</ul>
+  </div>
+</body>
+</html>
