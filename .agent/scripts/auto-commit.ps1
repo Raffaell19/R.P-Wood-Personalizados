@@ -3,7 +3,7 @@
 # Run: powershell -ExecutionPolicy Bypass -File .agent/scripts/auto-commit.ps1
 
 param(
-    [string]$WatchPath = "src",
+    [string]$WatchPath = "site",
     [int]$DebounceSeconds = 10
 )
 
