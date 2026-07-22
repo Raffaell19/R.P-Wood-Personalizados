@@ -105,7 +105,8 @@ export function renderFooter() {
             <li>Decoração em Madeira</li>
             <li>Brindes Corporativos</li>
             <li>Projetos para Igrejas</li>
-            <li>Presentes Exclusivos</li>
+            <li>Placas Rústicas</li>
+            <li>Tábuas de Corte</li>
           </ul>
         </div>
         <div class="footer-contact">
